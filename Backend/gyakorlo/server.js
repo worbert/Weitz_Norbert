@@ -33,3 +33,16 @@ app.get("/user", (req, res) => {
 app.listen(3001, () => {
     console.log("Server is running on port 3001");
 });
+
+app.post("/ujregio",(req,res)=>{
+    const sql ="INSERT INTO `regiok` (`rid`,`regionev`,`regio_tipusa`) VALUES(?,?,?)";
+    const values=['11','Budapest','Főváros'];
+ 
+    db.query(sql,values,(err,result)=>{
+        if(err){
+            console.error("Hiba történt:",err);
+            return res.status(500).json({error:"Adatbázis hiba történt."});
+        }
+        return res.status(200).json({message:"Sikeres beszúrás!",result});
+    })
+})
